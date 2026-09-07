@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StackByte VM</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="mark">SB</span><span><strong>StackByte VM</strong><small>字节码实验台</small></span></div>
+    <div class="status"><span id="statusDot"></span><span id="statusText">就绪</span></div>
+  </header>
+  <main>
+    <section class="workspace source-pane">
+      <div class="pane-head">
+        <label for="exampleSelect">示例程序</label>
+        <select id="exampleSelect" aria-label="选择示例"></select>
+      </div>
+      <div class="toolbar" role="toolbar" aria-label="执行工具">
+        <button id="compileBtn" class="secondary">编译</button>
+        <button id="runBtn" class="primary">运行</button>
+        <button id="stepBtn" class="secondary">单步</button>
+        <button id="continueBtn" class="secondary" disabled>继续</button>
+        <button id="resetBtn" class="icon" title="重置调试会话" aria-label="重置">↻</button>
+      </div>
+      <label class="editor-label" for="source">SOURCE.SB</label>
+      <textarea id="source" spellcheck="false" aria-label="StackByte 源代码"></textarea>
+      <div id="diagnostics" class="diagnostics" aria-live="polite"></div>
+    </section>
+    <section class="workspace inspect-pane">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="output" role="tab">输出</button>
+        <button class="tab" data-tab="bytecode" role="tab">字节码</button>
+        <button class="tab" data-tab="state" role="tab">运行状态</button>
+      </div>
+      <div id="outputPanel" class="panel active" role="tabpanel">
+        <pre id="output" class="terminal">等待运行...</pre>
+        <dl class="metrics">
+          <div><dt>指令</dt><dd id="instructions">0</dd></div>
+          <div><dt>最大栈深</dt><dd id="maxStack">0</dd></div>
+          <div><dt>调用帧</dt><dd id="maxFrames">0</dd></div>
+          <div><dt>耗时</dt><dd id="duration">0 ms</dd></div>
+        </dl>
+      </div>
+      <div id="bytecodePanel" class="panel" role="tabpanel"><pre id="bytecode">尚未编译</pre></div>
+      <div id="statePanel" class="panel" role="tabpanel">
+        <div class="current"><span>当前指令</span><strong id="currentInstruction">—</strong><small id="currentLine">源码行 —</small></div>
+        <div class="state-grid">
+          <div><h2>操作数栈</h2><ol id="stack" class="value-list"></ol></div>
+          <div><h2>调用帧</h2><ol id="frames" class="value-list"></ol></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

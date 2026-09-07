@@ -1,0 +1,11 @@
+fun makePair() {
+  var value = 0;
+  fun add() {
+    value = value + 1;
+    return value;
+  }
+  fun read() { return value; }
+  print add();
+  print read();
+}
+makePair();
